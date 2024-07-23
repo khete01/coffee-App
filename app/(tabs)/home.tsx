@@ -9,6 +9,7 @@ import {
 import { useAuth } from "@/contexts/AuthProvider";
 import { useData } from "@/contexts/DataProvider";
 import { useState } from "react";
+import { router } from "expo-router";
 
 export default function HomeScreen() {
   const { onLogout } = useAuth();
@@ -43,15 +44,17 @@ export default function HomeScreen() {
           <View style={styles.products}>
             {products.slice(0, 4).map((product) => (
               <View key={product.id} style={styles.productCard}>
-                <Image
-                  style={styles.productImage}
-                  source={{
-                    uri: product.image,
-                  }}
-                />
-                <Text>{product.name}</Text>
-                <Text>{product.price}</Text>
-                <Text>{product.description}</Text>
+                <Pressable onPress={() => router.push(`product/${product.id}`)}>
+                  <Image
+                    style={styles.productImage}
+                    source={{
+                      uri: product.image,
+                    }}
+                  />
+                  <Text>{product.name}</Text>
+                  <Text>{product.price}</Text>
+                  <Text>{product.description}</Text>
+                </Pressable>
               </View>
             ))}
           </View>
