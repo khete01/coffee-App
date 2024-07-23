@@ -31,23 +31,18 @@ export const AuthProvider = ({ children }: Props) => {
       const user = await AsyncStorage.getItem("@user");
       if (user) {
         setUser(JSON.parse(user));
+        router.push("home");
       }
     };
     checkUser();
   }, []);
 
-  // useEffect(() => {
-  //   if (!user) {
-  //     router.push("index");
-  //   } else {
-  //     router.push("home");
-  //   }
-  // }, [user]);
-
   const onLogin = (user: LoginInput) => {
     setUser({ email: user.email });
+    //backend ruu login huselt ilgeene tegeed zovshoorvol doorhi uildeliig hiine
     AsyncStorage.setItem("@user", JSON.stringify(user));
     router.push("home");
+    //ugui bol aldaag n zaalgana
   };
   const onLogout = async () => {
     await AsyncStorage.removeItem("@user");

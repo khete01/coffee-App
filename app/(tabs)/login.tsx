@@ -10,8 +10,6 @@ import {
   Keyboard,
   View,
 } from "react-native";
-// import PagerView from "react-native-pager-view";
-// import { useRef } from "react";
 
 export default function LoginScreen() {
   const { onLogin } = useAuth();
@@ -19,6 +17,7 @@ export default function LoginScreen() {
   const [password, onChangePassword] = useState<string | undefined>();
 
   const loginHandler = () => {
+    // back end ruu huselt ilgeegeed zovshoorvol doorhi uildeliig  const { onLogin } = useAuth(); iig ajiluulna
     if (email && password)
       onLogin({
         email,

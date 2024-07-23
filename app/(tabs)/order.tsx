@@ -1,3 +1,4 @@
+import SwipeToDeleteFlatList from "@/components/Orders";
 import { StyleSheet, Text, View } from "react-native";
 
 export default function LoginScreen() {
@@ -5,6 +6,7 @@ export default function LoginScreen() {
     <View style={styles.container}>
       <View style={styles.page}>
         <Text>Order</Text>
+        <SwipeToDeleteFlatList />
       </View>
     </View>
   );
@@ -19,5 +21,6 @@ const styles = StyleSheet.create({
     height: "100%",
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "green",
   },
 });
