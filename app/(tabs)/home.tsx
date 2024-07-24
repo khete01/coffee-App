@@ -10,11 +10,13 @@ import { useAuth } from "@/contexts/AuthProvider";
 import { useData } from "@/contexts/DataProvider";
 import { useState } from "react";
 import { router } from "expo-router";
+import React from "react";
 
 export default function HomeScreen() {
   const { onLogout } = useAuth();
-  const { products, categories } = useData();
+  const { products = [], categories = [] } = useData();
   const [selectedCategory, setSelectedCategory] = useState<number>(1);
+
   return (
     <View style={styles.container}>
       <View style={styles.page}>
@@ -25,20 +27,17 @@ export default function HomeScreen() {
         <View>
           <ScrollView horizontal={true}>
             <View style={styles.categories}>
-              {categories.map((category) => {
-                return (
-                  <Text
-                    key={category.id}
-                    style={{
-                      ...styles.categoryName,
-                      color:
-                        category.id == selectedCategory ? "#CE9760" : "white",
-                    }}
-                  >
-                    {category.name}
-                  </Text>
-                );
-              })}
+              {categories.map((category) => (
+                <Text
+                  key={category.id}
+                  style={{
+                    ...styles.categoryName,
+                    color: category.id === selectedCategory ? "#CE9760" : "white",
+                  }}
+                >
+                  {category.name}
+                </Text>
+              ))}
             </View>
           </ScrollView>
           <View style={styles.products}>

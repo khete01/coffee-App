@@ -6,6 +6,7 @@ import { router } from "expo-router";
 import { SecondView } from "@/components/subCompnonents/SecondView";
 import { ThirdView } from "@/components/subCompnonents/ThirdView";
 import { FourthView } from "@/components/subCompnonents/FourthView";
+import React from "react";
 
 export default function HomeScreen() {
   const pagerViewRef = useRef<PagerView>(null);

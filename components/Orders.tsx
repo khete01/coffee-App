@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Dimensions, StyleSheet, Text, View } from "react-native";
 import {
   Gesture,
@@ -13,16 +13,7 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import FontAwesome5 from "@expo/vector-icons/Ionicons";
-
-const STRINGS_ARRAY = [
-  "🛒 Buy groceries",
-  "📚 Read 20 pages of a book",
-  "🏋️‍♂️ Hit the gym",
-  "🍳 Cook dinner",
-  "🎸 Practice guitar",
-];
-
-const MAPPED_STRINGS = STRINGS_ARRAY.map((str, index) => ({ str, index }));
+import { useData } from "@/contexts/DataProvider";
 
 const WIDTH_CARD = Dimensions.get("window").width * 0.85;
 const ITEM_HEIGHT = 70;
@@ -44,8 +35,14 @@ interface IMappedStrings {
 }
 
 const Orders = () => {
-  const [exampleArray, setExampleArray] =
-    useState<IMappedStrings[]>(MAPPED_STRINGS);
+  const { products } = useData();
+
+  const [exampleArray, setExampleArray] = useState<IMappedStrings[]>(
+    products.map((product, index) => ({
+      str: product.name,
+      index,
+    }))
+  );
 
   const handleRemoveCard = useCallback((title: IMappedStrings) => {
     setExampleArray((prev) => {

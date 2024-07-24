@@ -14,7 +14,9 @@ export default function TabLayout() {
             headerShown: false,
             tabBarStyle: {
               display:
-                route.name === "index" || route.name === "login"
+                route.name === "index" ||
+                route.name === "login" ||
+                route.name === "register"
                   ? "none"
                   : "flex",
             },

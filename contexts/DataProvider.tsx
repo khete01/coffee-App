@@ -23,10 +23,14 @@ export const DataProvider = ({ children }: Props) => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      //   const response = await fetch("Backend URL");
-      //   const data = await response.json();
-      //   setProducts(data);
-      setProducts(dummyData.products);
+      const response = await fetch(
+        "https://coffee-back-zbsc-test.vercel.app/api/product"
+      );
+      const data = await response.json();
+      setProducts(data.product);
+      //setCategories(data.categories);
+      console.log(data);
+      // setProducts(dummyData.products);
       setCategories(dummyData.categories);
     };
     fetchProducts();

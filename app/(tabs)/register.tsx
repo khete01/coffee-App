@@ -1,6 +1,5 @@
 import { useAuth } from "@/contexts/AuthProvider";
-import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   ImageBackground,
   Pressable,
@@ -11,20 +10,30 @@ import {
   Keyboard,
   View,
 } from "react-native";
+// import PagerView from "react-native-pager-view";
+// import { useRef } from "react";
+import { useRouter } from "expo-router";
 
-export default function LoginScreen() {
-  const { onLogin } = useAuth();
+export default function RegisterScreen() {
+  const { onRegister } = useAuth();
   const [email, onChangeEmail] = useState<string | undefined>();
   const [password, onChangePassword] = useState<string | undefined>();
+  const [fullName, onChangeName] = useState<string | undefined>();
 
-  const loginHandler = () => {
-    // back end ruu huselt ilgeegeed zovshoorvol doorhi uildeliig  const { onLogin } = useAuth(); iig ajiluulna
-    if (email && password)
-      onLogin({
+  const registerHandler = () => {
+    if (email && password && fullName)
+      onRegister({
         email,
         password,
+        fullName,
       });
   };
+
+  const router = useRouter();
+  const changeRoute = () => {
+    router.push("login");
+  };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.container}>
@@ -34,6 +43,12 @@ export default function LoginScreen() {
           style={styles.image}
         />
         <View style={styles.page}>
+          <TextInput
+            style={styles.input}
+            onChangeText={onChangeName}
+            placeholder="User name"
+            placeholderTextColor={"#828282"}
+          />
           <TextInput
             style={styles.input}
             onChangeText={onChangeEmail}
@@ -47,10 +62,12 @@ export default function LoginScreen() {
             placeholderTextColor={"#828282"}
           />
           <Pressable>
-            <Text style={styles.forgotPass}>Forgot password?</Text>
+            <Text style={styles.forgotPass} onPress={changeRoute}>
+              Don't have account?
+            </Text>
           </Pressable>
-          <Pressable onPress={loginHandler} style={styles.button}>
-            <Text style={styles.buttonText}>Sign in</Text>
+          <Pressable onPress={registerHandler} style={styles.button}>
+            <Text style={styles.buttonText}>Register</Text>
           </Pressable>
         </View>
       </View>
@@ -79,6 +96,7 @@ const styles = StyleSheet.create({
   input: {
     width: 350,
     height: 59,
+    color: "white",
   },
   forgotPass: {
     color: "#CE9760",
