@@ -20,7 +20,14 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.page}>
-        <Text>Home</Text>
+        {/* <Text>Home</Text> */}
+
+
+
+        {/* discount */}
+
+
+
         <Pressable style={styles.logoutButton} onPress={onLogout}>
           <Text>LogOut</Text>
         </Pressable>
@@ -32,7 +39,8 @@ export default function HomeScreen() {
                   key={category.id}
                   style={{
                     ...styles.categoryName,
-                    color: category.id === selectedCategory ? "#CE9760" : "white",
+                    color:
+                      category.id === selectedCategory ? "#CE9760" : "white",
                   }}
                 >
                   {category.name}
@@ -50,7 +58,7 @@ export default function HomeScreen() {
                       uri: product.image,
                     }}
                   />
-                  <Text>{product.name}</Text>
+                  <Text style={styles.name}>{product.name}</Text>
                   <Text>{product.price}</Text>
                   <Text>{product.description}</Text>
                 </Pressable>
@@ -64,6 +72,9 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
+  name: {
+    color: "white",
+  },
   container: {
     flex: 1,
     backgroundColor: "#543A20",
@@ -87,7 +98,7 @@ const styles = StyleSheet.create({
   },
   productCard: {
     padding: 20,
-    backgroundColor: "lightgray",
+    backgroundColor: "#CE9760",
     borderRadius: 10,
     display: "flex",
     alignItems: "center",

@@ -64,7 +64,7 @@ export default function RegisterScreen() {
           />
           <Pressable>
             <Text style={styles.forgotPass} onPress={changeRoute}>
-            Already have an account
+              Already have an account
             </Text>
           </Pressable>
           <Pressable onPress={registerHandler} style={styles.button}>

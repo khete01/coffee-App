@@ -1,7 +1,7 @@
 import { useData } from "@/contexts/DataProvider";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 
 const ProductScreen: React.FC = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -15,5 +15,6 @@ const ProductScreen: React.FC = () => {
     </View>
   );
 };
+const styles = StyleSheet.create({});
 
 export default ProductScreen;
