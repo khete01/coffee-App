@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { Dimensions, StyleSheet, Text, View } from "react-native";
 import {
   Gesture,
@@ -13,7 +13,18 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import FontAwesome5 from "@expo/vector-icons/Ionicons";
+import React from "react";
 import { useData } from "@/contexts/DataProvider";
+
+// const STRINGS_ARRAY = [
+//   "🛒 Buy groceries",
+//   "📚 Read 20 pages of a book",
+//   "🏋️‍♂️ Hit the gym",
+//   "🍳 Cook dinner",
+//   "🎸 Practice guitar",
+// ];
+
+//const MAPPED_STRINGS = STRINGS_ARRAY.map((str, index) => ({ str, index }));
 
 const WIDTH_CARD = Dimensions.get("window").width * 0.85;
 const ITEM_HEIGHT = 70;
@@ -36,39 +47,66 @@ interface IMappedStrings {
 
 const Orders = () => {
   const { products } = useData();
+  // const [exampleArray, setExampleArray] =
+  //   useState<IMappedStrings[]>(MAPPED_STRINGS);
 
-  const [exampleArray, setExampleArray] = useState<IMappedStrings[]>(
-    products.map((product, index) => ({
-      str: product.name,
-      index,
-    }))
-  );
-
-  const handleRemoveCard = useCallback((title: IMappedStrings) => {
-    setExampleArray((prev) => {
-      return prev.filter((item) => item.index !== title.index);
-    });
-  }, []);
+  // const handleRemoveCard = useCallback((title: IMappedStrings) => {
+  //   setExampleArray((prev) => {
+  //     return prev.filter((item) => item.index !== title.index);
+  //   });
+  // }, []);
 
   return (
-    <GestureHandlerRootView style={styles.container}>
-      <View style={[styles.containerHeaderText]}>
-        <Text style={styles.headerText}>How to delete with swiping !?</Text>
-        <Text style={styles.text}>Array length is: {exampleArray?.length}</Text>
-      </View>
-      <View style={styles.viewContainer}>
-        {exampleArray.map((title) => (
-          <FieldSwipe
-            key={title.index}
-            title={title}
-            onRemove={handleRemoveCard}
-          />
-        ))}
-      </View>
-    </GestureHandlerRootView>
+    <View style={styles.container}>
+      {products.map((product) => (
+        <View style={style.productContainer}>
+          {/* <Image
+            source={{ uri: product.imageUrl }}
+            style={styles.productImage}
+          /> */}
+          <View style={style.productInfo}>
+            <Text style={style.productName}>{product.name}</Text>
+            <Text style={style.productDescription}>{product.description}</Text>
+            {/* <Text style={style.productCategory}>{product.category}</Text> */}
+          </View>
+        </View>
+      ))}
+    </View>
   );
 };
 
+const style = StyleSheet.create({
+  container: {
+    padding: 10,
+  },
+  productContainer: {
+    flexDirection: "row",
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 10,
+    overflow: "hidden",
+  },
+  productImage: {
+    width: 100,
+    height: 100,
+  },
+  productInfo: {
+    padding: 10,
+    flex: 1,
+  },
+  productName: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  productDescription: {
+    color: "#555",
+  },
+  productCategory: {
+    marginTop: 5,
+    color: "#888",
+  },
+});
 export default Orders;
 
 interface IFieldSwipe {

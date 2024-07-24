@@ -13,6 +13,7 @@ import {
 // import PagerView from "react-native-pager-view";
 // import { useRef } from "react";
 import { useRouter } from "expo-router";
+import React from "react";
 
 export default function RegisterScreen() {
   const { onRegister } = useAuth();
@@ -63,7 +64,7 @@ export default function RegisterScreen() {
           />
           <Pressable>
             <Text style={styles.forgotPass} onPress={changeRoute}>
-              Don't have account?
+            Already have an account
             </Text>
           </Pressable>
           <Pressable onPress={registerHandler} style={styles.button}>

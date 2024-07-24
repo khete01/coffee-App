@@ -11,12 +11,12 @@ import {
   Keyboard,
   View,
 } from "react-native";
-
+import { useRouter } from "expo-router";
 export default function LoginScreen() {
   const { onLogin } = useAuth();
   const [email, onChangeEmail] = useState<string | undefined>();
   const [password, onChangePassword] = useState<string | undefined>();
-
+  const router = useRouter();
   const loginHandler = () => {
     // back end ruu huselt ilgeegeed zovshoorvol doorhi uildeliig  const { onLogin } = useAuth(); iig ajiluulna
     if (email && password)
@@ -24,6 +24,9 @@ export default function LoginScreen() {
         email,
         password,
       });
+  };
+  const goToRegister = () => {
+    router.push("register");
   };
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -47,7 +50,10 @@ export default function LoginScreen() {
             placeholderTextColor={"#828282"}
           />
           <Pressable>
-            <Text style={styles.forgotPass}>Forgot password?</Text>
+            {/* <Text style={styles.forgotPass}>Forgot password?</Text> */}
+            <Text style={styles.dontHave} onPress={goToRegister}>
+              Don't have account?
+            </Text>
           </Pressable>
           <Pressable onPress={loginHandler} style={styles.button}>
             <Text style={styles.buttonText}>Sign in</Text>
@@ -79,6 +85,7 @@ const styles = StyleSheet.create({
   input: {
     width: 350,
     height: 59,
+    color: "white",
   },
   forgotPass: {
     color: "#CE9760",
@@ -99,5 +106,10 @@ const styles = StyleSheet.create({
     color: "#543A20",
     fontSize: 20,
     fontWeight: "bold",
+  },
+  dontHave: {
+    color: "white",
+    alignSelf: "flex-end",
+    // marginTop:10
   },
 });

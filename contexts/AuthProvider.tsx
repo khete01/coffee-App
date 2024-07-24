@@ -53,7 +53,7 @@ export const AuthProvider = ({ children }: Props) => {
   const onRegister = async (registerInput: RegisterInput) => {
     try {
       const response = await axios.post(
-        "https://coffee-back-zbsc-test.vercel.app/api/user",
+        "https://coffee-back-a6hj.vercel.app/api/user",
         {
           email: registerInput.email,
           password: registerInput.password,

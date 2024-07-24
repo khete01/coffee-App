@@ -14,6 +14,7 @@ type DataContextType = {
   setProducts: React.Dispatch<React.SetStateAction<Product[]>>;
   setBasketItems: React.Dispatch<React.SetStateAction<BasketItem[]>>;
 };
+
 const DataContext = React.createContext<DataContextType>({} as DataContextType);
 
 export const DataProvider = ({ children }: Props) => {
@@ -23,18 +24,20 @@ export const DataProvider = ({ children }: Props) => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const response = await fetch(
-        "https://coffee-back-zbsc-test.vercel.app/api/product"
-      );
-      const data = await response.json();
-      setProducts(data.product);
-      //setCategories(data.categories);
-      console.log(data);
-      // setProducts(dummyData.products);
-      setCategories(dummyData.categories);
+      try {
+        const response = await fetch(
+          "https://coffee-back-a6hj.vercel.app/api/product"
+        );
+        const data = await response.json();
+        setProducts(data);
+        setCategories(dummyData.categories);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
     };
     fetchProducts();
   }, []);
+
   return (
     <DataContext.Provider
       value={{
