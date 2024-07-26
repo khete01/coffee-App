@@ -1,9 +1,10 @@
 export type Product = {
+  title: string;
   name: string;
   price: number;
   image: string;
   description: string;
-  id: number;
+  id: string;
   categoryId: number;
 };
 export type BasketItem = {
@@ -13,4 +14,9 @@ export type BasketItem = {
 export type Category = {
   id: number;
   name: string;
+};
+export type Discounts = {
+  producId: String;
+  title: String;
+  description: String;
 };

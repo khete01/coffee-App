@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BasketItem, Category, Product } from "@/utils/types";
+import { BasketItem, Category, Product, Discounts } from "@/utils/types";
 import dummyData from "../utils/dummy.json";
 
 type Props = {
@@ -10,9 +10,11 @@ type DataContextType = {
   products: Product[];
   categories: Category[];
   basketItems: BasketItem[];
+  discounts: Discounts[];
   setCategories: React.Dispatch<React.SetStateAction<Category[]>>;
   setProducts: React.Dispatch<React.SetStateAction<Product[]>>;
   setBasketItems: React.Dispatch<React.SetStateAction<BasketItem[]>>;
+  setDiscounts: React.Dispatch<React.SetStateAction<Discounts[]>>;
 };
 
 const DataContext = React.createContext<DataContextType>({} as DataContextType);
@@ -21,7 +23,7 @@ export const DataProvider = ({ children }: Props) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [basketItems, setBasketItems] = useState<BasketItem[]>([]);
-
+  const [discounts, setDiscounts] = useState<Discounts[]>([]);
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -38,6 +40,21 @@ export const DataProvider = ({ children }: Props) => {
     fetchProducts();
   }, []);
 
+  useEffect(() => {
+    const fetchDiscounts = async () => {
+      try {
+        const response = await fetch(
+          "https://coffee-back-a6hj.vercel.app/api/promotion"
+        );
+        const data = await response.json();
+        setDiscounts(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+    fetchDiscounts();
+  }, []);
+
   return (
     <DataContext.Provider
       value={{
@@ -47,6 +64,8 @@ export const DataProvider = ({ children }: Props) => {
         setProducts,
         basketItems,
         setBasketItems,
+        setDiscounts,
+        discounts,
       }}
     >
       {children}

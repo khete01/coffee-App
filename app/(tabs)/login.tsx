@@ -28,6 +28,7 @@ export default function LoginScreen() {
   const goToRegister = () => {
     router.push("register");
   };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.container}>

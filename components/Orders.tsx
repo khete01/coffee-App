@@ -16,16 +16,6 @@ import FontAwesome5 from "@expo/vector-icons/Ionicons";
 import React from "react";
 import { useData } from "@/contexts/DataProvider";
 
-// const STRINGS_ARRAY = [
-//   "🛒 Buy groceries",
-//   "📚 Read 20 pages of a book",
-//   "🏋️‍♂️ Hit the gym",
-//   "🍳 Cook dinner",
-//   "🎸 Practice guitar",
-// ];
-
-//const MAPPED_STRINGS = STRINGS_ARRAY.map((str, index) => ({ str, index }));
-
 const WIDTH_CARD = Dimensions.get("window").width * 0.85;
 const ITEM_HEIGHT = 70;
 const WIDTH_SCREEN = Dimensions.get("window").width;
@@ -47,14 +37,6 @@ interface IMappedStrings {
 
 const Orders = () => {
   const { products } = useData();
-  // const [exampleArray, setExampleArray] =
-  //   useState<IMappedStrings[]>(MAPPED_STRINGS);
-
-  // const handleRemoveCard = useCallback((title: IMappedStrings) => {
-  //   setExampleArray((prev) => {
-  //     return prev.filter((item) => item.index !== title.index);
-  //   });
-  // }, []);
 
   return (
     <View style={styles.container}>

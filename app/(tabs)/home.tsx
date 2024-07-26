@@ -11,6 +11,7 @@ import { useData } from "@/contexts/DataProvider";
 import { useState } from "react";
 import { router } from "expo-router";
 import React from "react";
+import Discount from "@/components/Discount";
 
 export default function HomeScreen() {
   const { onLogout } = useAuth();
@@ -22,15 +23,11 @@ export default function HomeScreen() {
       <View style={styles.page}>
         {/* <Text>Home</Text> */}
 
-
-
-        {/* discount */}
-
-
-
         <Pressable style={styles.logoutButton} onPress={onLogout}>
           <Text>LogOut</Text>
         </Pressable>
+        <Discount />
+
         <View>
           <ScrollView horizontal={true}>
             <View style={styles.categories}>
